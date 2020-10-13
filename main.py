@@ -19,7 +19,7 @@ try:
     # read static parameter
     CLOCKIFY_WS = inifile.get('clockify', 'workspace_name')
     CLOCKIFY_API_TOKEN = inifile.get('clockify', 'api_token')
-    CLOCKIFY_GET_INTERVAL = inifile.get('clockify', 'interval')
+    CLOCKIFY_GET_INTERVAL = 5
     DISCORD_WEBHOOK_URL = inifile.get('discord', 'webhook_url')
 
 except:
@@ -120,7 +120,7 @@ class DiscordManager(object):
 
     def sendMsg(self, body):
         res = requests.post(
-            self.url,
+            self.url + "/slack",
             data=json.dumps(body)
             )
         return

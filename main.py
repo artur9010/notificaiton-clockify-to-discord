@@ -20,7 +20,7 @@ try:
     CLOCKIFY_WS = inifile.get('clockify', 'workspace_name')
     CLOCKIFY_API_TOKEN = inifile.get('clockify', 'api_token')
     CLOCKIFY_GET_INTERVAL = inifile.get('clockify', 'interval')
-    SLACK_WEBHOOK_URL = inifile.get('slack', 'webhook_url')
+    DISCORD_WEBHOOK_URL = inifile.get('discord', 'webhook_url')
 
 except:
     print('Error occured while config.ini file reading')
@@ -113,10 +113,10 @@ class ClockifyManager(object):
         print('Response Body:', json.dumps(res.json(), indent=4))
 
 
-class SlackManager(object):
+class DiscordManager(object):
 
     def __init__(self):
-        self.url = SLACK_WEBHOOK_URL
+        self.url = DISCORD_WEBHOOK_URL
 
     def sendMsg(self, body):
         res = requests.post(
@@ -163,8 +163,8 @@ if __name__ == '__main__':
     # create API client
     cm = ClockifyManager(CLOCKIFY_API_TOKEN, CLOCKIFY_WS)
 
-    # create Slack API client
-    sm = SlackManager()
+    # create Discord API client
+    dm = DiscordManager()
 
     # set time (CLOCKIFY_GET_INTERVAL minutes ago)
     date = datetime.datetime.today() - relativedelta(minutes=int(CLOCKIFY_GET_INTERVAL))
@@ -219,13 +219,13 @@ if __name__ == '__main__':
             else:
                 end_time = end_jst.strftime("%Y/%m/%d %H:%M:%S")
 
-            # create body of slack message
-            body = sm.createMsgBody(user['name'],
+            # create body of discord message
+            body = dm.createMsgBody(user['name'],
                                  pj_name,
                                  msg,
                                  start_jst.strftime("%Y/%m/%d %H:%M:%S"),
                                  end_time,
                                  pj_color)
 
-            # send slack notification using webhook
-            sm.sendMsg(body)
+            # send discord notification using webhook
+            dm.sendMsg(body)

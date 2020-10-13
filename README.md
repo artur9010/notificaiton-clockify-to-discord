@@ -1,5 +1,5 @@
-# notificaiton-clockify-to-slack
-This script get clockify time entries and send them to slack webhook notificaton.
+# notificaiton-clockify-to-discord
+This script get clockify time entries and send them to discord webhook notificaton.
 
 ## Sample result
 <img width="491" alt="sample-result" src="https://user-images.githubusercontent.com/2556855/58643035-758c1500-8339-11e9-942f-51196b336764.png">

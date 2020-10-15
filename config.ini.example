@@ -1,6 +1,0 @@
-[clockify]
-workspace_name = my workspace
-api_token = xxxxxxxxxx
-
-[discord]
-webhook_url = https://discordapp.com/api/webhooks/...

@@ -1,4 +1,4 @@
-import requests, json, os
+import requests, json, os, datetime
 from flask import Flask, request, Response
 
 app = Flask(__name__)
@@ -25,6 +25,10 @@ def respond():
     cend = "Currently working"
     if cj['timeInterval']['end'] is not None:
         cend = cj['timeInterval']['end']
+
+    cduration = "Currently working"
+    if cj['timeInterval']['duration'] is not None:
+        cduration = cj['timeInterval']['duration'].replace("PT", "")
     
     dj = {
         "username": "Clockify",
@@ -50,6 +54,11 @@ def respond():
                     {
                         "name": "End date",
                         "value": cend,
+                        "short": True
+                    },
+                    {
+                        "name": "Duration",
+                        "value": cduration,
                         "short": True
                     },
                 ]
